@@ -1,0 +1,68 @@
+﻿
+@model WeatherForecastDisplay
+@{
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <span>City:</span>
+        <input type="text" name="city" />
+        <input type="submit" value="Search" />
+    }
+    <hr />
+
+    @if (Model != null)
+    {
+        <h4>City Information</h4>
+        <hr />
+        <div>
+            <h6>Name</h6>
+            <span>@Model.Location.Name</span>
+        </div>
+        <div>
+            <h6>Region</h6>
+            <span>@Model.Location.Region</span>
+        </div>
+        <div>
+            <h6>Country</h6>
+            <span>@Model.Location.Country</span>
+        </div>
+        <div>
+            <h6>Lat</h6>
+            <span>@Model.Location.Lat</span>
+        </div>
+
+        <div>
+            <h6>Lon</h6>
+            <span>@Model.Location.Lon</span>
+        </div>
+
+        <div>
+            <h6>Time Zone</h6>
+            <span>@Model.Location.Tz_id</span>
+        </div>
+
+        <div>
+            <h6>Current Time</h6>
+            <span>@Model.Location.Localtime</span>
+        </div>
+
+        @if (Model.HourlyForcast != null)
+        {
+            <h4>Forcast</h4>
+            <hr />
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>Time</th>
+                    <th>Condition</th>
+                </tr>
+                @foreach (Hour hour in Model.HourlyForcast)
+                {
+                    <tr>
+                        <td>@hour.Time</td>
+                        <td>@hour.Condition.Text</td>
+                    </tr>
+                }
+            </table>
+        }
+    }
+}
+
